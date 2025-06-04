@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    margin: 0px;
+    background-color: #fff;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .main-content {
+    background: url('../images/aboutBG.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    animation: fadeInUp 0.8s ease;
+    color: #fff;
+    min-height: 500px;
+  }
+  
+  .our-story {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease;
+    color: inherit;
+    padding: 20px;
+  }
+  
+  .our-story h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .our-story h1:hover {
+    color: #d53b3b;
+  }
+  
+  .our-story h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: normal;
+    opacity: 0.8;
+  }
+  
+  .our-story p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+  
+  .mission-vision {
+    animation: fadeInUp 0.8s ease;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+    color: inherit;
+    padding: 20px;
+  }
+  
+  .mission-vision h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .mission-vision h3:hover {
+    color: #d53b3b;
+  }
+  
+  .mvv {
+    margin-bottom: 20px;
+    padding: 10px;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    border-left: 4px solid #d53b3b;
+    background-color: #f7f7f7;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    animation: fadeInUp 1s ease;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+  }
+  
+  .mvv h4 {
+    margin: 10px 0;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  .mvv h4:hover {
+    color: #d53b3b;
+  }
+  
+  .mvv p {
+    padding: 0 10px 10px 10px;
+    line-height: 1.4;
+  }
+  

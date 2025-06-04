@@ -1,0 +1,52 @@
+
+@media (max-width: 768px) {
+    body {
+      margin: 10px;
+      font-size: 0.95rem;
+    }
+    header nav ul {
+      display: block;
+      text-align: center;
+    }
+    header nav ul li {
+      display: block;
+      margin: 5px 0;
+    }
+    .section-container {
+      margin: 20px auto;
+      padding: 15px;
+    }
+    footer ul {
+      flex-direction: column;
+    }
+    footer ul li {
+      margin: 5px 0;
+    }
+    .homepage #unique-selling h3 {
+      font-size: 2rem; 
+    }
+    .homepage #unique-selling p {
+      font-size: 1rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      font-size: 0.9rem;
+    }
+    header h2 {
+      font-size: 1.5rem;
+    }
+    .section-container {
+      padding: 10px;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      padding: 8px;
+    }
+    form button[type="submit"] {
+      padding: 8px 12px;
+    }
+  }
+  

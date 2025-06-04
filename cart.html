@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - BatchmateSweets</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="header-logo-link">
+            <img src="images/logo.jpg" alt="Batchmate Sweets Logo">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="aboutus.html">About us</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Shopping Cart / Profile</a></li>
+            </ul>
+        </nav>
+        <nav class="user-navigation">
+            <ul>
+                <li><a href="#" id="loginBtn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cart-container">
+        <h2>Review Your Order</h2>
+        <div id="cart-items-list">
+            </div>
+
+        <div class="delivery-section">
+            <h3>Delivery Details</h3>
+            <form id="deliveryForm">
+                <div>
+                    <label for="customerName">Full Name:</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                    <p class="error-message" id="customerName-error" style="display:none; color:red;"></p>
+                </div>
+                <div>
+                    <label for="customerEmail">Email:</label>
+                    <input type="email" id="customerEmail" name="customerEmail" required>
+                    <p class="error-message" id="customerEmail-error" style="display:none; color:red;"></p>
+                </div>
+                <div>
+                    <label for="customerPhone">Phone Number:</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required>
+                    <p class="error-message" id="customerPhone-error" style="display:none; color:red;"></p>
+                </div>
+                <div>
+                    <label for="customerAddress">Delivery Address (Place):</label>
+                    <textarea id="customerAddress" name="customerAddress" rows="3" required></textarea>
+                    <p class="error-message" id="customerAddress-error" style="display:none; color:red;"></p>
+                </div>
+                <div>
+                    <label for="delivery-date">Preferred Delivery Date:</label>
+                    <input type="date" id="delivery-date" name="delivery-date" required>
+                    <p class="error-message" id="delivery-date-error" style="display:none; color:red;"></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="cart-summary">
+            <h3>Order Summary</h3>
+            <p>Total: ₱<span id="cart-total">0.00</span></p>
+            <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+
+        <div class="profile-container">
+            <h1>Submitted Orders</h1>
+            <section class="orders-section">
+                <h3>Your Orders</h3>
+                <p class="no-customer-orders-message">You have no current orders.</p>
+            </section>
+            <div style="text-align: center;">
+                <a href="menu.html" class="cta-button-profile">Go to Menu & Order More!</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-row-1">
+            <a href="index.html" class="footer-logo-link">
+                <img src="images/logo.jpg" alt="Batchmate Sweets Logo" width="100" style="border-radius: 50%;">
+            </a>
+            <p class="footer-catchphrase">Baked with Love, Served with Joy.</p>
+        </div>
+
+        <div class="footer-actions-row">
+            <span class="quick-link-text">Quick link:</span>
+            <div class="social-icons-horizontal">
+                <a href="https://www.facebook.com/batchmatesweetsbylorz" target="_blank" class="fab fa-facebook" aria-label="Facebook"></a>
+                <a href="mailto:batchmatesweetscl@gmail.com" class="fas fa-envelope" aria-label="Email"></a>
+            </div>
+            <a href="contact.html?subject=ApplicationOrFeedback" class="footer-apply-tell-us-link" aria-label="Apply now or tell us">
+                <i class="fas fa-phone-alt"></i>
+            </a>
+        </div>
+        <p class="footer-copyright">&copy; <span id="current-year-cart-footer">2025</span> Batchmate Sweets. All rights reserved.</p>
+    </footer>
+
+   <div id="loginSignupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-body">
+        <form id="loginFormModal" style="margin-bottom: 20px;">
+          <h3>Login</h3>
+          <label for="modalLoginUser">Username/Email:</label>
+          <input type="text" id="modalLoginUser" name="modalLoginUser" required>
+          <label for="modalLoginPass">Password:</label>
+          <input type="password" id="modalLoginPass" name="modalLoginPass" required>
+          <button type="submit">Login</button>
+          <p id="modalLoginErrorMessage" class="error-message" style="display:none;"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <script src="js/model-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsList = document.getElementById('cart-items-list');
+            const cartTotalElement = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const minQuantity = 20;
+            const PRICE_INCREASE_FACTOR = 10;
+            const CURRENCY_SYMBOL = '₱';
+
+            const deliveryForm = document.getElementById('deliveryForm');
+            const customerNameInput = document.getElementById('customerName');
+            const customerEmailInput = document.getElementById('customerEmail');
+            const customerPhoneInput = document.getElementById('customerPhone');
+            const customerAddressInput = document.getElementById('customerAddress');
+            const deliveryDateInput = document.getElementById('delivery-date');
+
+            const customerNameError = document.getElementById('customerName-error');
+            const customerEmailError = document.getElementById('customerEmail-error');
+            const customerPhoneError = document.getElementById('customerPhone-error');
+            const customerAddressError = document.getElementById('customerAddress-error');
+            const deliveryDateError = document.getElementById('delivery-date-error');
+
+            const ordersSection = document.querySelector('.orders-section');
+            const noCustomerOrdersMessage = ordersSection ? ordersSection.querySelector('.no-customer-orders-message') : null;
+
+
+            const cartFooterYearSpan = document.getElementById('current-year-cart-footer');
+            if (cartFooterYearSpan) {
+                cartFooterYearSpan.textContent = new Date().getFullYear();
+            } else {
+                const genericFooterYearSpan = document.getElementById('current-year');
+                if (genericFooterYearSpan) {
+                    genericFooterYearSpan.textContent = new Date().getFullYear();
+                }
+            }
+
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            if (deliveryDateInput) {
+                deliveryDateInput.setAttribute('min', minDate);
+            } else {
+                console.warn('Delivery date input field not found.');
+            }
+
+            function getCart() {
+                const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+                return cart.map(item => ({
+                    ...item,
+                    originalPrice: parseFloat(item.originalPrice || item.price || 0),
+                    currentPrice: parseFloat(item.currentPrice || item.price || 0),
+                    isDrink: typeof item.isDrink === 'boolean' ? item.isDrink : (item.name.toLowerCase().includes('juice') || item.name.toLowerCase().includes('soda') || item.name.toLowerCase().includes('cooler') || item.name.toLowerCase().includes('latte') || item.name.toLowerCase().includes('coffee')),
+                    size: (typeof item.isDrink === 'boolean' ? item.isDrink : (item.name.toLowerCase().includes('juice') || item.name.toLowerCase().includes('soda'))) && !item.size ? '16oz' : item.size
+                }));
+            }
+
+            function saveCart(cart) {
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                displayCartItems();
+            }
+
+            function displayCartItems() {
+                if (!cartItemsList || !cartTotalElement || !checkoutBtn || !deliveryDateInput) {
+                    console.error('One or more cart elements are missing from the DOM. Cart display aborted.');
+                    return;
+                }
+                const cart = getCart();
+                cartItemsList.innerHTML = '';
+                let totalAmount = 0;
+
+                if (cart.length === 0) {
+                    cartItemsList.innerHTML = `<p>Your cart is empty. <a href="menu.html">Continue shopping!</a></p>`;
+                    cartTotalElement.textContent = '0.00';
+                    checkoutBtn.disabled = true;
+                    deliveryDateInput.disabled = true;
+                    if(customerNameInput) customerNameInput.disabled = true;
+                    if(customerEmailInput) customerEmailInput.disabled = true;
+                    if(customerPhoneInput) customerPhoneInput.disabled = true;
+                    if(customerAddressInput) customerAddressInput.disabled = true;
+                    return;
+                }
+
+                checkoutBtn.disabled = false;
+                deliveryDateInput.disabled = false;
+                if(customerNameInput) customerNameInput.disabled = false;
+                if(customerEmailInput) customerEmailInput.disabled = false;
+                if(customerPhoneInput) customerPhoneInput.disabled = false;
+                if(customerAddressInput) customerAddressInput.disabled = false;
+
+
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price (per item)</th>
+                            <th>Size</th>
+                            <th>Quantity (Min ${minQuantity})</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                const tbody = table.querySelector('tbody');
+
+                cart.forEach(item => {
+                    const tr = document.createElement('tr');
+                    let sizeSelectorHTML = '<td>N/A</td>';
+                    const displayItemPrice = item.currentPrice.toFixed(2);
+
+                    if (item.isDrink) {
+                        sizeSelectorHTML = `
+                            <td>
+                                <select class="size-selector" data-id="${item.id}" aria-label="Select size for ${item.name}">
+                                    <option value="16oz" ${item.size === '16oz' ? 'selected' : ''}>16 oz</option>
+                                    <option value="24oz" ${item.size === '24oz' ? 'selected' : ''}>24 oz</option>
+                                </select>
+                            </td>
+                        `;
+                    }
+
+                    const subtotal = (item.quantity * item.currentPrice).toFixed(2);
+                    tr.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${CURRENCY_SYMBOL}${displayItemPrice}</td>
+                        ${sizeSelectorHTML}
+                        <td>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="${minQuantity}" data-id="${item.id}" aria-label="Quantity for ${item.name}">
+                        </td>
+                        <td>${CURRENCY_SYMBOL}${subtotal}</td>
+                        <td>
+                            <button class="remove-item-btn" data-id="${item.id}" aria-label="Remove ${item.name}">Remove</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                    totalAmount += parseFloat(subtotal);
+                });
+
+                cartItemsList.appendChild(table);
+                cartTotalElement.textContent = totalAmount.toFixed(2);
+
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', handleQuantityChange);
+                    input.addEventListener('input', handleQuantityChange);
+                });
+                document.querySelectorAll('.remove-item-btn').forEach(button => {
+                    button.addEventListener('click', handleRemoveItem);
+                });
+                document.querySelectorAll('.size-selector').forEach(selector => {
+                    selector.addEventListener('change', handleSizeChange);
+                });
+            }
+
+            function handleQuantityChange(event) {
+                const input = event.target;
+                const itemId = input.dataset.id;
+                let newQuantity = parseInt(input.value, 10);
+
+                if (isNaN(newQuantity) || newQuantity < minQuantity) {
+                    newQuantity = minQuantity;
+                    input.value = newQuantity;
+                }
+                updateCartItemQuantity(itemId, newQuantity);
+            }
+
+            function updateCartItemQuantity(itemId, newQuantity) {
+                let cart = getCart();
+                const itemIndex = cart.findIndex(cartItem => cartItem.id === itemId);
+                if (itemIndex > -1) {
+                    cart[itemIndex].quantity = newQuantity;
+                    saveCart(cart);
+                }
+            }
+
+            function handleRemoveItem(event) {
+                const itemIdToRemove = event.target.dataset.id;
+                removeItemFromCart(itemIdToRemove);
+            }
+
+            function removeItemFromCart(itemId) {
+                let cart = getCart();
+                cart = cart.filter(item => item.id !== itemId);
+                saveCart(cart);
+            }
+
+            function handleSizeChange(event) {
+                const selectElement = event.target;
+                const itemId = selectElement.dataset.id;
+                const newSize = selectElement.value;
+                let cart = getCart();
+                const itemIndex = cart.findIndex(cartItem => cartItem.id === itemId);
+
+                if (itemIndex > -1 && cart[itemIndex].isDrink) {
+                    cart[itemIndex].size = newSize;
+                    const originalPrice = parseFloat(cart[itemIndex].originalPrice);
+
+                    if (newSize === '24oz') {
+                        cart[itemIndex].currentPrice = parseFloat((originalPrice + PRICE_INCREASE_FACTOR).toFixed(2));
+                    } else {
+                        cart[itemIndex].currentPrice = originalPrice;
+                    }
+                    saveCart(cart);
+                }
+            }
+
+            function validateDeliveryDetails() {
+                let isValid = true;
+                customerNameError.style.display = 'none';
+                customerEmailError.style.display = 'none';
+                customerPhoneError.style.display = 'none';
+                customerAddressError.style.display = 'none';
+                deliveryDateError.style.display = 'none';
+
+                if (!customerNameInput.value.trim()) {
+                    customerNameError.textContent = 'Please enter your full name.';
+                    customerNameError.style.display = 'block';
+                    isValid = false;
+                }
+                if (!customerEmailInput.value.trim()) {
+                    customerEmailError.textContent = 'Please enter your email address.';
+                    customerEmailError.style.display = 'block';
+                    isValid = false;
+                } else if (!/^\S+@\S+\.\S+$/.test(customerEmailInput.value.trim())) {
+                    customerEmailError.textContent = 'Please enter a valid email address.';
+                    customerEmailError.style.display = 'block';
+                    isValid = false;
+                }
+                if (!customerPhoneInput.value.trim()) {
+                    customerPhoneError.textContent = 'Please enter your phone number.';
+                    customerPhoneError.style.display = 'block';
+                    isValid = false;
+                }
+                if (!customerAddressInput.value.trim()) {
+                    customerAddressError.textContent = 'Please enter your delivery address.';
+                    customerAddressError.style.display = 'block';
+                    isValid = false;
+                }
+
+                const selectedDate = deliveryDateInput.value;
+                if (!selectedDate) {
+                    deliveryDateError.textContent = 'Please select a delivery date.';
+                    deliveryDateError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    const dateObj = new Date(selectedDate + "T00:00:00");
+                    const todayForCompare = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    if (dateObj < todayForCompare) {
+                        deliveryDateError.textContent = 'Delivery date cannot be today or in the past. Please select tomorrow onwards.';
+                        deliveryDateError.style.display = 'block';
+                        isValid = false;
+                    } else if (dateObj.getDay() === 0) {
+                        deliveryDateError.textContent = 'Sorry, we do not deliver on Sundays. Please choose another date.';
+                        deliveryDateError.style.display = 'block';
+                        isValid = false;
+                    }
+                }
+                return isValid;
+            }
+
+            function displayCustomerOrders() {
+                if (!ordersSection || !noCustomerOrdersMessage) {
+                    console.warn("Customer orders section not found in HTML.");
+                    return;
+                }
+
+                const submittedOrders = JSON.parse(localStorage.getItem('submittedOrders')) || [];
+                
+                while (ordersSection.children.length > 1 && ordersSection.lastChild !== noCustomerOrdersMessage) {
+                    if(ordersSection.lastChild.tagName !== 'H3') {
+                       ordersSection.removeChild(ordersSection.lastChild);
+                    } else if (ordersSection.children.length === 1 && ordersSection.firstChild.tagName === 'H3') {
+                        break;
+                    }
+                }
+
+
+                if (submittedOrders.length === 0) {
+                    noCustomerOrdersMessage.style.display = 'block';
+                } else {
+                    noCustomerOrdersMessage.style.display = 'none';
+                    const ul = document.createElement('ul');
+                    ul.classList.add('customer-order-list');
+
+                    submittedOrders.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                    submittedOrders.forEach(order => {
+                        const li = document.createElement('li');
+                        li.classList.add('customer-order-item');
+                        
+                        let statusClass = 'status-unknown';
+                        if (order.status) {
+                            statusClass = `status-${order.status.toLowerCase().replace(/\s+/g, '-')}`;
+                        }
+
+                        li.innerHTML = `
+                            <strong>Order ID:</strong> ${order.orderId} <br>
+                            <strong>Date:</strong> ${new Date(order.timestamp).toLocaleDateString()} <br>
+                            <strong>Total:</strong> ${order.totalAmount} <br>
+                            <strong>Status:</strong> <span class="${statusClass}">${order.status || 'N/A'}</span>
+                        `;
+                        ul.appendChild(li);
+                    });
+                    ordersSection.appendChild(ul);
+                }
+            }
+
+
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', () => {
+                    if (getCart().length === 0) {
+                        alert('Your cart is empty. Please add items to proceed.');
+                        return;
+                    }
+                    if (!validateDeliveryDetails()) {
+                        return;
+                    }
+
+                    const selectedDeliveryDate = deliveryDateInput ? deliveryDateInput.value : 'N/A';
+                    const cartDataForOrder = getCart();
+                    const totalOrderAmount = cartTotalElement ? cartTotalElement.textContent : '0.00';
+
+                    const customerDetails = {
+                        name: customerNameInput.value.trim(),
+                        email: customerEmailInput.value.trim(),
+                        phone: customerPhoneInput.value.trim(),
+                        address: customerAddressInput.value.trim()
+                    };
+
+                    const newOrder = {
+                        orderId: `BS-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+                        timestamp: new Date().toISOString(),
+                        cartItems: cartDataForOrder,
+                        deliveryDate: selectedDeliveryDate,
+                        totalAmount: `${CURRENCY_SYMBOL}${totalOrderAmount}`,
+                        status: 'Pending',
+                        customerDetails: customerDetails,
+                        adminComments: []
+                    };
+
+                    let submittedOrders = JSON.parse(localStorage.getItem('submittedOrders')) || [];
+                    submittedOrders.push(newOrder);
+                    localStorage.setItem('submittedOrders', JSON.stringify(submittedOrders));
+
+                    localStorage.removeItem('shoppingCart');
+                    displayCartItems();
+                    if (deliveryForm) deliveryForm.reset();
+                    displayCustomerOrders();
+
+                    alert(`Order Submitted! Your Order ID is ${newOrder.orderId}.\nThank you for your order. We will contact you shortly regarding payment and delivery details.`);
+                });
+            } else {
+                console.warn('Checkout button not found.');
+            }
+
+            displayCartItems();
+            displayCustomerOrders();
+        });
+    </script>
+</body>
+</html>

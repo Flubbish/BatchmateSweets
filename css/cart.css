@@ -1,0 +1,221 @@
+.cart-container {
+  max-width: 950px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cart-container h2 {
+  text-align: center;
+  color: #1e3932;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+#cart-items-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#cart-items-list th,
+#cart-items-list td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--platinum);
+  vertical-align: middle;
+}
+
+#cart-items-list th {
+  background-color: #f8f9fa;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  color: var(--onyx);
+}
+
+#cart-items-list th:nth-child(3),
+#cart-items-list td:nth-child(3),
+#cart-items-list th:nth-child(4),
+#cart-items-list td:nth-child(4) {
+  text-align: center;
+}
+
+#cart-items-list p {
+  text-align: center;
+  font-size: 1.1em;
+  padding: 20px;
+  color: var(--onyx);
+}
+
+#cart-items-list p a {
+  color: #00704A;
+  text-decoration: underline;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.size-selector {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em;
+  min-width: 90px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.remove-item-btn {
+  background-color: #e74c3c;
+  color: var(--white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+.remove-item-btn:hover {
+  background-color: #c0392b;
+}
+
+.delivery-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.delivery-section h3 {
+  margin-top: 0;
+  color: var(--onyx);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.delivery-section form div {
+    margin-bottom: 15px;
+}
+
+.delivery-section label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.delivery-section input[type="text"],
+.delivery-section input[type="email"],
+.delivery-section input[type="tel"],
+.delivery-section input[type="date"],
+.delivery-section textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.delivery-section textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.error-message {
+  font-size: 0.85em;
+  color: var(--penn-red);
+  margin-top: 4px;
+}
+
+.cart-summary {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #00704A;
+  text-align: right;
+}
+
+.cart-summary h3 {
+  font-size: 1.4em;
+  margin: 0 0 10px 0;
+  color: var(--onyx);
+}
+.cart-summary p {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #1e3932;
+  margin: 0 0 20px 0;
+}
+
+#checkout-btn {
+  background-color: #2ecc71;
+  color: var(--white);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#checkout-btn:hover {
+  background-color: #27ae60;
+}
+#checkout-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.profile-container h1 {
+  color: var(--penn-red);
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+.orders-section {
+  margin-bottom: 30px;
+}
+
+.orders-section h3 {
+  color: var(--onyx);
+  border-bottom: 2px solid var(--penn-red);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+}
+
+.cta-button-profile {
+  display: inline-block;
+  background-color: var(--penn-red);
+  color: var(--white);
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+.cta-button-profile:hover {
+  background-color: var(--jet);
+}

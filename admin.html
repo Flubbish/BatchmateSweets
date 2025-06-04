@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Batchmate Sweets</title>
+  <link rel="stylesheet" href="css/layout.css">  <link rel="stylesheet" href="css/admin.css">   <link rel="icon" type="image/x-icon" href="images/logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="admin-page">
+
+  <header class="admin-header">
+    <div class="admin-header-logo">
+      <img src="images/logo.jpg" alt="Batchmate Sweets Logo" height="50">
+      <h1>Admin Panel</h1>
+    </div>
+    <nav class="admin-header-nav">
+      <a href="index.html">Logout (To Main Site)</a>
+    </nav>
+  </header>
+
+  <main class="admin-main-content">
+    <section id="order-management">
+      <h2>Order Management</h2>
+      <div class="order-filters">
+        <label for="statusFilter">Filter by status:</label>
+        <select id="statusFilter" name="statusFilter">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="denied">Denied</option>
+        </select>
+        <button id="loadOrdersBtn">Load/Refresh Orders</button>
+      </div>
+      <div class="order-list">
+        <p class="no-orders-message" style="display: none;">No orders found matching the current filter.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row-1">
+      <a href="index.html" class="footer-logo-link">
+        <img src="images/logo.jpg" alt="Batchmate Sweets Logo" width="100" style="border-radius: 50%;">
+      </a>
+      <p class="footer-catchphrase">Baked with Love, Served with Joy.</p>
+    </div>
+    <div class="footer-actions-row">
+      <span class="quick-link-text">Quick link:</span>
+      <div class="social-icons-horizontal">
+        <a href="https://www.facebook.com/batchmatesweetsbylorz" target="_blank" class="fab fa-facebook" aria-label="Facebook"></a>
+        <a href="mailto:batchmatesweetscl@gmail.com" class="fas fa-envelope" aria-label="Email"></a>
+      </div>
+      <a href="contact.html?subject=ApplicationOrFeedback" class="footer-apply-tell-us-link" aria-label="Apply now or tell us">
+        <i class="fas fa-phone-alt"></i>
+      </a>
+    </div>
+    <p class="footer-copyright">&copy; <span id="current-year-admin-footer">2025</span> Batchmate Sweets. All rights reserved.</p>
+  </footer>
+
+  <script src="js/admin.js"></script>
+  <script>
+    const adminFooterYearSpan = document.getElementById('current-year-admin-footer');
+    if (adminFooterYearSpan) {
+      adminFooterYearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>

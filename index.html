@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home: BatchmateSweets</title>
+  <link rel="stylesheet" href="css/layout.css" /> <link rel="stylesheet" href="css/homepage.css" /> <link rel="stylesheet" href="css/responsive.css" /> <link rel="icon" type="image/x-icon" href="images/logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="homepage">
+  <header>
+    <a href="index.html" class="header-logo-link">
+      <img src="images/logo.jpg" alt="Batchmate Sweets Logo"> </a>
+    <nav class="main-navigation">
+      <ul>
+        <li><a href="index.html">Home Page</a></li>
+        <li><a href="aboutus.html">About us</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html">Shopping Cart / Profile</a></li>
+      </ul>
+    </nav>
+    <nav class="user-navigation">
+      <ul>
+        <li><a href="#" id="loginBtn">Login</a></li> </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="hero-content">
+        <h1>"Savor Every Craving Under One Roof!"</h1>
+        <p>Welcome to Batchmate Sweets – your one-stop destination for irresistible treats, handcrafted coffee, and delicious meals.</p>
+        <a href="contact.html" class="cta-button">Visit Us Today!</a>
+      </div>
+    </section>
+
+    <section id="unique-selling">
+      <h3>Why Choose Batchmate Sweets?</h3>
+      <p><strong>All-In-One Experience:</strong> Enjoy our bakery, cafe, and restaurant offerings under one roof.</p>
+      <p><strong>Fresh & Quality Ingredients:</strong> Every item is crafted with passion using the finest ingredients.</p>
+      <p><strong>Friendly Service:</strong> Our team is dedicated to making every visit memorable.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row-1">
+      <a href="index.html" class="footer-logo-link">
+        <img src="images/logo.jpg" alt="Batchmate Sweets Logo" width="100" style="border-radius: 50%;"> </a>
+      <p class="footer-catchphrase">Baked with Love, Served with Joy.</p>
+    </div>
+
+    <div class="footer-actions-row">
+      <span class="quick-link-text">Quick link:</span>
+      <div class="social-icons-horizontal">
+        <a href="https://www.facebook.com/batchmatesweetsbylorz" target="_blank" class="fab fa-facebook" aria-label="Facebook"></a>
+        <a href="mailto:batchmatesweetscl@gmail.com" class="fas fa-envelope" aria-label="Email"></a>
+      </div>
+      <a href="contact.html?subject=ApplicationOrFeedback" class="footer-apply-tell-us-link" aria-label="Apply now or tell us">
+        <i class="fas fa-phone-alt"></i>
+      </a>
+    </div>
+
+    <p class="footer-copyright">&copy; <span id="current-year-footer">2025</span> Batchmate Sweets. All rights reserved.</p>
+  </footer>
+
+  <div id="loginSignupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Login</h2>
+      <div class="modal-body">
+        <form id="loginFormModal" style="margin-bottom: 20px;">
+          <h3>Login</h3>
+          <label for="modalLoginUser">Username/Email:</label>
+          <input type="text" id="modalLoginUser" name="modalLoginUser" required>
+          <label for="modalLoginPass">Password:</label>
+          <input type="password" id="modalLoginPass" name="modalLoginPass" required>
+          <button type="submit">Login</button>
+          <p id="modalLoginErrorMessage" class="error-message" style="display:none;"></p>
+        </form>
+      </div>
+    </div>
+  </div>  
+
+  <script src="js/model-auth.js"></script>
+  <script>
+    const footerYearSpan = document.getElementById('current-year-footer');
+    if (footerYearSpan) {
+      footerYearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+</html>

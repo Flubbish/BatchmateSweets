@@ -1,0 +1,131 @@
+.menu-page main.layout {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: var(--white);
+  border-radius: 8px;
+}
+
+.menu-page section > h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8em;
+  color: var(--penn-red);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--penn-red);
+  letter-spacing: 1px;
+}
+
+.bestsellers,
+.fruitsoda,
+.frappe,
+.cookie,
+.cake,
+.cupcake {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.bestsellers h2,
+.fruitsoda h2,
+.frappe h2,
+.cookie h2,
+.cake h2,
+.cupcake h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+  color: var(--onyx);
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+  grid-column: 1 / -1;
+}
+
+.bestsellers h2::after,
+.fruitsoda h2::after,
+.frappe h2::after,
+.cookie h2::after,
+.cake h2::after,
+.cupcake h2::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 2.5px;
+  background-color: var(--penn-red);
+  margin: 10px auto 0;
+}
+
+.menu-page .image {
+  background-color: #fdfdfd;
+  border: 1px solid var(--platinum);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-page .image:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.menu-page .image img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 1px solid var(--platinum);
+}
+
+.menu-page .image p {
+  font-size: 1.25em;
+  font-weight: 600;
+  color: var(--jet);
+  margin-bottom: 10px;
+  min-height: 2.5em;
+  line-height: 1.3;
+  flex-grow: 1;
+}
+
+.menu-page .image .add-to-cart-btn {
+  background-color: var(--penn-red);
+  color: var(--white);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: auto;
+}
+
+.menu-page .image .add-to-cart-btn:hover {
+  background-color: #7a0706;
+  transform: scale(1.05);
+}
+
+.menu-page .image .add-to-cart-btn:active {
+  transform: scale(0.98);
+}
+
+.menu-page .desserts {
+  margin-bottom: 20px;
+}
